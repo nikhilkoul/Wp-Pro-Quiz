@@ -1380,7 +1380,14 @@ wpProQuizReady(function () {
 
                 $e.find('.wpProQuiz_correct_answer').text(results.comp.correctQuestions);
 
-                results.comp.result = Math.round(results.comp.points / config.globalPoints * 100 * 100) / 100;
+                //results.comp.result = Math.round(results.comp.points / config.globalPoints * 100 * 100) / 100;
+                config.globalPoints = 2 * total_questions
+                var total_questions = v.questionList.children().length
+                var correct_questions = a.comp.correctQuestions
+                var incorrect_questions = total_questions - correct_questions
+                var points_scored = 2 * correct_questions - 0.66 * incorrect_questions
+                results.comp.result = Math.round(points_scored/(2.0 * total_questions)  * 100.0 * 100)/100
+                results.comp.points = points_scored
                 results.comp.solved = 0;
 
                 //for(var i = 0; i < quizSolved.length; i++)
