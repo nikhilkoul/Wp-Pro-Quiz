@@ -1379,8 +1379,14 @@ wpProQuizReady(function () {
                 plugin.methode.checkQuestion(globalElements.questionList.children(), true);
 
                 $e.find('.wpProQuiz_correct_answer').text(results.comp.correctQuestions);
-
-                results.comp.result = Math.round(results.comp.points / config.globalPoints * 100 * 100) / 100;
+                config.globalPoints = 2 * total_questions
+                var total_questions = v.questionList.children().length
+                var correct_questions = a.comp.correctQuestions
+                var incorrect_questions = total_questions - correct_questions
+                var points_scored = 2 * correct_questions - 0.66 * incorrect_questions
+                a.comp.result = Math.round(points_scored/(2.0 * total_questions)  * 100.0 * 100)/100
+                a.comp.points = points_scored
+                // a.comp.result = Math.round((a.comp.points - ((r.globalPoints - a.comp.correctQuestions ) * 1/3))/ r.globalPoints * 100 * 100) / 100
                 results.comp.solved = 0;
 
                 //for(var i = 0; i < quizSolved.length; i++)
@@ -1388,9 +1394,9 @@ wpProQuizReady(function () {
 
                 var $pointFields = $e.find('.wpProQuiz_points span');
 
-                $pointFields.eq(0).text(results.comp.points);
-                $pointFields.eq(1).text(config.globalPoints);
-                $pointFields.eq(2).text(results.comp.result + '%');
+                $pointFields.eq(0).text(a.comp.points);
+                $pointFields.eq(1).text(config.globalPoints);     
+                $pointFields.eq(2).text(a.comp.result + '%');
 
                 //Result-Text START
                 var $resultText = $e.find('.wpProQuiz_resultsList > li').eq(plugin.methode.findResultIndex(results.comp.result));
