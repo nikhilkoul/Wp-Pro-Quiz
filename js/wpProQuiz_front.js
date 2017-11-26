@@ -1379,8 +1379,8 @@ wpProQuizReady(function () {
                 plugin.methode.checkQuestion(globalElements.questionList.children(), true);
 
                 $e.find('.wpProQuiz_correct_answer').text(results.comp.correctQuestions);
-
-                results.comp.result = Math.round(results.comp.points / config.globalPoints * 100 * 100) / 100;
+ 
+                results.comp.result = Math.round((config.globalPoints-results.comp.correctQuestions)/ config.globalPoints * 100 * 100) / 100;
                 results.comp.solved = 0;
 
                 //for(var i = 0; i < quizSolved.length; i++)
